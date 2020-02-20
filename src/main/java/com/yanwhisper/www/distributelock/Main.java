@@ -33,5 +33,10 @@ public class Main {
         Stat stat = new Stat();
         byte[] bytes = zk.getData("/root/rc1", true, stat);
         System.out.println(bytes.toString() + ":" + stat.getVersion());
+
+        System.out.println("------------分割线-------------");
+
+        ThreadLocal tl1 = ThreadLocal.withInitial(() -> String.valueOf(System.currentTimeMillis()));
+
     }
 }
