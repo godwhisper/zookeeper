@@ -25,16 +25,13 @@ public class ThreadExecutorDemo {
             // 2.若线程池中线程数等于核心线程，则会先将任务加入到任务队列，队列没满则加入
             // 3.若任务队列已满，则会先检查线程池中线程数是否超过最大数，如果没有超过最大线程数则新建线程执行
             // 4.若队列已满，并且线程池中线程数已达到最大线程数，则执行拒绝策略
-            executor.execute(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Thread.currentThread().sleep(1000);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println(number);
+            executor.execute(() -> {
+                try {
+                    Thread.currentThread().sleep(1000);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+                System.out.println(number);
             });
         }
         System.out.println("存活线程数：" + executor.getActiveCount());
