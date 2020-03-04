@@ -1,0 +1,10 @@
+主要组件：Channel、Buffer、Selector
+channel实现：FileChannel、SocketChannel、ServerSocketChannel、DatagramChannel等
+其中FileChannel不能设置为非阻塞，其没有实现SelectableChannel（configureBlocking方法设置非阻塞）
+Buffer对基本数据类型都有对应的实现：ByteBuffer、IntBuffer、LongBuffer等
+Selector作为通道管理器，可以在selector上注册多个通道（比如管理多个网路连接），并监听通道感兴趣的事件
+数据总是从channel读到buffer，或者从buffer写入到channel
+
+transferTo：将一个FileChannel中的数据拷贝到另一个Channel
+transferFrom：将一个Channel中的数据拷贝到一个FileChannel
+这两个方法一般可用于高效的网络/文件数据传输或者大文件拷贝，使用了零拷贝，避免了两次用户态和内核态的上下文切换
